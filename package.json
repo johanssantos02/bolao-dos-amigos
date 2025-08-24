@@ -1,0 +1,23 @@
+{
+  "name": "meu-projeto",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm:dev-back\" \"npm:dev-front\"",
+    "dev-back": "npm --prefix backend run dev",
+    "dev-front": "npm --prefix frontend run dev",
+    "build": "npm --prefix backend run build && npm --prefix frontend run build",
+    "start": "concurrently \"npm:serve-back\" \"npm:serve-front\"",
+    "serve-back": "npm --prefix backend run start",
+    "serve-front": "npm --prefix frontend run preview"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "concurrently": "^9.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.11.0",
+    "express": "^5.1.0",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.8.1"
+  }
+}

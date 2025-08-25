@@ -27,14 +27,14 @@ export const JogadorController = {
 
         try {
             const sqlInsert = `
-            insert into jogadores (nome) value (${nome})
+            insert into jogadores (nome) values ('${nome}')
             `
 
             await query(sqlInsert)
 
             return res.status(200).json({message: "Jogador Cadastrado com sucesso!"});
         } catch (error) {
-            return res.status(500).json({error: "Erro ao cadastrar jogador, verifique os dados"})
+             res.status(500).json({error: "Erro ao cadastrar jogador, verifique os dados"})
         }
     }
 }

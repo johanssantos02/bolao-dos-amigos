@@ -6,8 +6,8 @@ import backImg from "../../assets/estadio-de-futebol-a-noite.webp"
 export const ContainerBody = styled.div`
 
     width: 100%;
-    height: calc(100vh - 80px);
-    overflow: hidden;
+    height: auto;
+    overflow: auto;
     position: relative;
 
      &::before {

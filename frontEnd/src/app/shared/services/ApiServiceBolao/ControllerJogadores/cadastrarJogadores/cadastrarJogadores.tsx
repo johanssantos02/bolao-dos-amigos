@@ -10,9 +10,7 @@ export const CadastrarJogadores = async(
     params: ICadastrarJogadoresProps
 ) => {
    try {
-    const response = await Api.get("/jogadores/cadastrar-jogador", {
-        params
-    })
+    const response = await Api.post("/jogadores/cadastrar-jogador", params)
 
     return response
    } catch (error) {

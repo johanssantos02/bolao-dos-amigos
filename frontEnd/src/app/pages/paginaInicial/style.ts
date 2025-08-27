@@ -40,7 +40,7 @@ export const ContainerJogosAtuais = styled.div`
     width: 80%;
     height: 65vh;
     background-color: var(--verde-escuro);
-    margin: 10px auto;
+    margin: 0 auto;
 
 `
 
@@ -72,5 +72,13 @@ export const ContainerTituloTableJogos = styled.div`
         width: 100%;
         font-weight: 400;
     }
+
+`
+export const ContainerFiltrosTabela = styled.div`
+
+    width: 91%;
+    height: 50px;
+    border: solid 1px yellow;
+    margin: 0 auto;
 
 `

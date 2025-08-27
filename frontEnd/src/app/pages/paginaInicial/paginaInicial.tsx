@@ -4,7 +4,7 @@ import { BodyCentral } from "../../shared/components/bodyCentral/bodyCentral";
 import { ContainerBody } from "../../shared/components/bodyCentral/style";
 import { TituloPage } from "../jogadores/style";
 import { TabelaDados, type IHeaderConfig } from "../../shared/components/Tabela/tabela";
-import { ContainerCentralPaginaInicial, ContainerJogosAtuais, ContainerTituloTable, ContainerTituloTableJogos } from "./style";
+import { ContainerCentralPaginaInicial, ContainerFiltrosTabela, ContainerJogosAtuais, ContainerTituloTable, ContainerTituloTableJogos } from "./style";
 
 export const PaginaInicial = () => {
 
@@ -32,9 +32,13 @@ export const PaginaInicial = () => {
             <Header />
             <BodyCentral>
                 <ContainerBody>
+                    <TituloPage className="titulo">Tabela de palpites</TituloPage>
+                    <ContainerFiltrosTabela>
+
+                    </ContainerFiltrosTabela>
                     <ContainerCentralPaginaInicial>
                         <ContainerTituloTable>
-                            <TituloPage className="titulo">Tabela de palpites</TituloPage>
+
                             <TabelaDados
                                 // dadosJogadores={dados}
                                 dadosHeader={dadosHeader}
@@ -42,8 +46,8 @@ export const PaginaInicial = () => {
                             />
                         </ContainerTituloTable>
                         <ContainerTituloTableJogos>
-                            <TituloPage className="titulo">Jogos selecionados</TituloPage>
                             <ContainerJogosAtuais>
+                                <TituloPage className="titulo">Jogos selecionados</TituloPage>
                                 <h2>ran</h2>
                             </ContainerJogosAtuais>
                         </ContainerTituloTableJogos>

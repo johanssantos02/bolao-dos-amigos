@@ -7,6 +7,7 @@ export const ContainerBody = styled.div`
 
     width: 100%;
     height: auto;
+    min-height: 100vh;
     overflow: auto;
     position: relative;
 

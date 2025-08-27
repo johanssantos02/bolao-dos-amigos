@@ -3,12 +3,12 @@ import { query } from "../db/db";
 
 
 
-export const ApostasController = {
+export const BolaoController = {
 
     listar: async (_req: Request, res: Response) => {
         try {
 
-            const response = await query("Select * from apostas")
+            const response = await query("Select * from bolao")
             return res.json(response)
 
         } catch (error) {
@@ -19,22 +19,22 @@ export const ApostasController = {
 
     criar: async (req: Request, res: Response) => {
 
-        const { nome} = req.body;
+        const { nomeBolao, dataCriacao} = req.body;
 
-        if (!nome) {
+        if (!nomeBolao && dataCriacao) {
             return res.status(400).json({ error: "Campos obrigatórios faltando" });
         }
 
         try {
             const sqlInsert = `
-            insert into apostas (nome) value (${nome})
+            insert into bolao (nomeBolao, dataCriacao) values ('${nomeBolao}, ${dataCriacao}')
             `
 
             await query(sqlInsert)
 
             return res.status(200).json({message: "Jogador Cadastrado com sucesso!"});
         } catch (error) {
-            return res.status(500).json({error: "Erro ao cadastrar jogador, verifique os dados"})
+             res.status(500).json({error: "Erro ao cadastrar jogador, verifique os dados"})
         }
     }
 }

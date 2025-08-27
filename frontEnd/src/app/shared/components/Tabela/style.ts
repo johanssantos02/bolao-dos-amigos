@@ -55,6 +55,20 @@ export const Tr = styled.tr`
         }
     }
 
+    .tdBolao{
+
+        background-color: rgba(163, 181, 182, 0.5);
+        text-align: center;
+        font-size: 13px;
+        color: white;
+        text-transform: uppercase;
+        width: 25%;
+        /* border: solid 1px black; */
+        height: 35px;
+        margin-top: 5px;
+        
+    }
+
 `
 export const Th = styled.th`
     /* width: 100%; */

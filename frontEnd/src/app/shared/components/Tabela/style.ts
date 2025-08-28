@@ -21,7 +21,7 @@ export const Tr = styled.tr`
     .headerJogadores{
 
         color: white;
-        font-size: 1em;
+        font-size: 1.3em;
         font-weight: 500;
         &:nth-of-type(1){
             width: 80%;
@@ -38,7 +38,7 @@ export const Tr = styled.tr`
 
         background-color: rgba(163, 181, 182, 0.5);
         text-align: center;
-        font-size: 18px;
+        font-size: 14px;
         color: white;
         text-transform: uppercase;
         &:nth-of-type(1){

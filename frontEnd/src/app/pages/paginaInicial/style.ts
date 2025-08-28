@@ -82,3 +82,33 @@ export const ContainerFiltrosTabela = styled.div`
     margin: 0 auto;
 
 `
+export const ButtonSelecionarBolao = styled.button`
+
+    width: 18%;
+    height: 35px;
+    margin-right: 5%;
+    display: flex;
+    flex-direction: row;
+    border: none;
+    border-radius: 4px;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    background-color: #02735E;
+    color: white;
+    font-size: 1em;
+    position: absolute;
+    right: 2em;
+`
+
+export const ContainerTituloAndButton = styled.div`
+
+    width: 91%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    border: solid 1px red;
+    margin: 0 auto;
+`

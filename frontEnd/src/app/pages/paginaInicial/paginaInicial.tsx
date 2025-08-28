@@ -1,10 +1,13 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Header } from "../../shared/components/header/header";
 import { BodyCentral } from "../../shared/components/bodyCentral/bodyCentral";
 import { ContainerBody } from "../../shared/components/bodyCentral/style";
 import { TituloPage } from "../jogadores/style";
 import { TabelaDados, type IHeaderConfig } from "../../shared/components/Tabela/tabela";
-import { ContainerCentralPaginaInicial, ContainerFiltrosTabela, ContainerJogosAtuais, ContainerTituloTable, ContainerTituloTableJogos } from "./style";
+import { ButtonSelecionarBolao, ContainerCentralPaginaInicial, ContainerFiltrosTabela, ContainerJogosAtuais, ContainerTituloAndButton, ContainerTituloTable, ContainerTituloTableJogos } from "./style";
+import ModalListaDeBolao from "../../shared/components/modalListaDeBolao/modalListaDeBolao";
+import type { IObterBolaoData } from "../../shared/services/ApiServiceBolao/ControllerBolao/ObterBolao/obterBolao";
+import { toast } from "react-toastify";
 
 export const PaginaInicial = () => {
 
@@ -15,24 +18,30 @@ export const PaginaInicial = () => {
         { label: "Resultado", key: "nome" }
     ];
 
+    const [
+        modalSelecionarBolaoEstaAberta,
+        setModalSelecionarBolaoEstaAberta
+    ] = useState(false)
+    const [bolaoSelecionado, setBolaoSelecionado] = useState<IObterBolaoData>({} as IObterBolaoData);
 
     useEffect(() => {
-        fetch('http://localhost:4000/apostas')
-            .then(res => res.json())
-            .then(data => {
-                console.log('Apostas:', data);
-                // use o data no seu estado
-            })
-            .catch(err => {
-                console.error('Erro ao buscar apostas:', err);
-            });
-    }, []);
+        toast.success(bolaoSelecionado.nomeBolao)
+    }, [bolaoSelecionado])
+
+
     return (
         <Fragment>
             <Header />
             <BodyCentral>
                 <ContainerBody>
-                    <TituloPage className="titulo">Tabela de palpites</TituloPage>
+                    <ContainerTituloAndButton>
+                        <TituloPage className="titulo">Tabela de palpites</TituloPage>
+                        <ButtonSelecionarBolao
+                            onClick={() => {
+                                setModalSelecionarBolaoEstaAberta(true)
+                            }}
+                        >Selecionar Bolão</ButtonSelecionarBolao>
+                    </ContainerTituloAndButton>
                     <ContainerFiltrosTabela>
 
                     </ContainerFiltrosTabela>
@@ -53,7 +62,13 @@ export const PaginaInicial = () => {
                         </ContainerTituloTableJogos>
                     </ContainerCentralPaginaInicial>
                 </ContainerBody>
-
+                            {modalSelecionarBolaoEstaAberta && (
+                                <ModalListaDeBolao
+                                openModal={modalSelecionarBolaoEstaAberta}
+                                closeModal={() => setModalSelecionarBolaoEstaAberta(false)}
+                                selecionarBolao={setBolaoSelecionado}
+                                />
+                            )}
             </BodyCentral>
         </Fragment>
 

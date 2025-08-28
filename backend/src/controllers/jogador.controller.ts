@@ -16,6 +16,24 @@ export const JogadorController = {
             return res.status(500).json({ error: "Erro ao buscar" })
         }
     },
+    listarJogadoresBolao: async (req: Request, res: Response) => {
+
+        const idBolao = req.body;
+
+        try {
+            const response = await query(
+                `SELECT DISTINCT
+                j.idJogador,
+                j.nome
+                FROM apostas a
+                INNER JOIN jogadores j ON a.idJogador = j.idJogador
+                WHERE a.idBolao = ${idBolao}`
+            )
+        } catch (error) {
+            console.error(error)
+            return res.status(500).json({ error: "Erro ao buscar Jogadores deste bolao" })
+        }
+    },
 
     criar: async (req: Request, res: Response) => {
 

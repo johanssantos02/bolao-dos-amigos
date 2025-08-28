@@ -6,6 +6,7 @@ const jogadorRoutes = Router()
 
 
 jogadorRoutes.get("/obter-jogadores", JogadorController.listar)
+jogadorRoutes.get("/listar-jogadores-do-bolao", JogadorController.listarJogadoresBolao)
 jogadorRoutes.post("/cadastrar-jogador", JogadorController.criar)
 
 

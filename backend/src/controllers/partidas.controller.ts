@@ -42,7 +42,8 @@ export const partidasController = {
             ${t2},
             ${dataPartida},
             ${resultadopartida},
-            ${vencedorIdTime}')
+            ${vencedorIdTime},
+            ${idBolao}')
             `
 
             await query(sqlInsert)

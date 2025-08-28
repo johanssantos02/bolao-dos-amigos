@@ -17,9 +17,11 @@ export const BolaoController = {
         }
     },
 
+    
+
     criar: async (req: Request, res: Response) => {
 
-        const { nomeBolao, dataCriacao} = req.body;
+        const { nomeBolao, dataCriacao } = req.body;
 
         if (!nomeBolao && dataCriacao) {
             return res.status(400).json({ error: "Campos obrigatórios faltando" });
@@ -32,9 +34,9 @@ export const BolaoController = {
 
             await query(sqlInsert)
 
-            return res.status(200).json({message: "Jogador Cadastrado com sucesso!"});
+            return res.status(200).json({ message: "Jogador Cadastrado com sucesso!" });
         } catch (error) {
-             res.status(500).json({error: "Erro ao cadastrar jogador, verifique os dados"})
+            res.status(500).json({ error: "Erro ao cadastrar jogador, verifique os dados" })
         }
     }
 }

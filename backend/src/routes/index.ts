@@ -1,8 +1,9 @@
 import { Router } from "express";
 import jogadorRoutes from "./jogador.routes";
-import apostasRoutes from "./apostas.routes";
+import apostasRoutes from "./palpites.routes";
 import partidasRoutes from "./partidas.routes";
 import bolaoRouter from "./bolao.routes";
+import palpitesRoutes from "./palpites.routes";
 
 
 const routes = Router();
@@ -20,7 +21,7 @@ routes.use("/heath", (_req, res) => {
 
 //APOSTAS
 
-routes.use("/apostas", apostasRoutes);
+routes.use("/palpites", palpitesRoutes);
 
 routes.use("/heath", (_req, res) => {
     res.json({

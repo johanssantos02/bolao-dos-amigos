@@ -80,9 +80,20 @@ export const ContainerFiltrosTabela = styled.div`
     height: 50px;
     border: solid 1px yellow;
     margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    .botaoCadastrarJogos{
+        background-color: var(--verde-claro);
+        width: 220px;
+        height: 40px;
+    }
+
 
 `
-export const ButtonSelecionarBolao = styled.button`
+export const ButtonPageInitial = styled.button`
 
     width: 18%;
     height: 35px;

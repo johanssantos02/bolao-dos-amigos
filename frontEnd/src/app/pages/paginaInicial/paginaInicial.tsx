@@ -4,7 +4,7 @@ import { BodyCentral } from "../../shared/components/bodyCentral/bodyCentral";
 import { ContainerBody } from "../../shared/components/bodyCentral/style";
 import { TituloPage } from "../jogadores/style";
 import { TabelaDados, type IHeaderConfig } from "../../shared/components/Tabela/tabela";
-import { ButtonSelecionarBolao, ContainerCentralPaginaInicial, ContainerFiltrosTabela, ContainerJogosAtuais, ContainerTituloAndButton, ContainerTituloTable, ContainerTituloTableJogos } from "./style";
+import { ButtonPageInitial, ContainerCentralPaginaInicial, ContainerFiltrosTabela, ContainerJogosAtuais, ContainerTituloAndButton, ContainerTituloTable, ContainerTituloTableJogos } from "./style";
 import ModalListaDeBolao from "../../shared/components/modalListaDeBolao/modalListaDeBolao";
 import type { IObterBolaoData } from "../../shared/services/ApiServiceBolao/ControllerBolao/ObterBolao/obterBolao";
 import { toast } from "react-toastify";
@@ -36,13 +36,30 @@ export const PaginaInicial = () => {
                 <ContainerBody>
                     <ContainerTituloAndButton>
                         <TituloPage className="titulo">Tabela de palpites</TituloPage>
-                        <ButtonSelecionarBolao
+                        <ButtonPageInitial
                             onClick={() => {
                                 setModalSelecionarBolaoEstaAberta(true)
                             }}
-                        >Selecionar Bolão</ButtonSelecionarBolao>
+                        >Selecionar Bolão
+                        </ButtonPageInitial>
                     </ContainerTituloAndButton>
                     <ContainerFiltrosTabela>
+                        <ButtonPageInitial
+                            className="botaoCadastrarJogos"
+                            onClick={() => {
+
+                            }}
+                        >
+
+                        </ButtonPageInitial>
+                        <ButtonPageInitial
+                            className="botaoCadastrarJogos"
+                            onClick={() => {
+
+                            }}
+                        >
+
+                        </ButtonPageInitial>
 
                     </ContainerFiltrosTabela>
                     <ContainerCentralPaginaInicial>
@@ -62,13 +79,13 @@ export const PaginaInicial = () => {
                         </ContainerTituloTableJogos>
                     </ContainerCentralPaginaInicial>
                 </ContainerBody>
-                            {modalSelecionarBolaoEstaAberta && (
-                                <ModalListaDeBolao
-                                openModal={modalSelecionarBolaoEstaAberta}
-                                closeModal={() => setModalSelecionarBolaoEstaAberta(false)}
-                                selecionarBolao={setBolaoSelecionado}
-                                />
-                            )}
+                {modalSelecionarBolaoEstaAberta && (
+                    <ModalListaDeBolao
+                        openModal={modalSelecionarBolaoEstaAberta}
+                        closeModal={() => setModalSelecionarBolaoEstaAberta(false)}
+                        selecionarBolao={setBolaoSelecionado}
+                    />
+                )}
             </BodyCentral>
         </Fragment>
 

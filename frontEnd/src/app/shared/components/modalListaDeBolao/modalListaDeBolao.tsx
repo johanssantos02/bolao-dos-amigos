@@ -3,28 +3,28 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import { toast } from 'react-toastify';
 import { ApiServiceBolao } from '../../services/ApiServiceBolao';
 import React, { useEffect, useState } from 'react';
 import type { IObterBolaoData } from '../../services/ApiServiceBolao/ControllerBolao/ObterBolao/obterBolao';
+import { BodyModal, Bolao, HeaderModal } from './style';
 
 const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 500,
-    height: 600,
+    width: 400,
+    height: 500,
     bgcolor: 'background.paper',
     boxShadow: 24,
+    borderRadius: 5,
 };
 
 export interface IModalListarBolaoProps {
     openModal: boolean;
     closeModal: () => void;
-    selecionarBolao:  React.Dispatch<React.SetStateAction<IObterBolaoData>>;
+    selecionarBolao: React.Dispatch<React.SetStateAction<IObterBolaoData>>;
 }
 
 export default function ModalListaDeBolao({
@@ -69,13 +69,21 @@ export default function ModalListaDeBolao({
             >
                 <Fade in={openModal}>
                     <Box sx={style}>
-                        {dadosBolao.map((b, index) => (
-                            <ul key={index}>
-                                <li
-                                onClick={() => selecionarBolao(b)}
-                                >{b.nomeBolao}</li>
-                            </ul>
-                        ))}
+                        <HeaderModal>
+                            <h2>Selecionar Bolão</h2>
+                        </HeaderModal>
+                        <BodyModal>
+                            {dadosBolao.map((b, index) => (
+                                <ul key={index}>
+                                    <Bolao
+                                        onClick={() => {
+                                            selecionarBolao(b)
+                                            closeModal()
+                                        }}
+                                    >{b.nomeBolao}</Bolao>
+                                </ul>
+                            ))}
+                        </BodyModal>
                     </Box>
                 </Fade>
             </Modal>

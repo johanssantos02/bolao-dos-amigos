@@ -9,25 +9,37 @@ const config: sql.config = {
   authentication: {
     type: 'default',
     options: {
-      userName: 'johan', 
+      userName: 'johan',
       password: '123456',
     }
   }
 };
 
+let pool: sql.ConnectionPool;
 
-const pool = new sql.ConnectionPool(config);
+const getPool = async () => {
+  if (!pool) {
+    pool = await sql.connect(config);
+  }
+  return pool;
+};
 
-// Exporte a função de query
-export const query = async (queryString: string) => {
+// Função de query com parâmetros
+export const query = async (queryString: string, params?: { name: string, type: any, value: any }[]) => {
   try {
-    await pool.connect();
-    const result = await pool.request().query(queryString);
+    const pool = await getPool();
+    const request = pool.request();
+
+    if (params) {
+      for (const param of params) {
+        request.input(param.name, param.type, param.value);
+      }
+    }
+
+    const result = await request.query(queryString);
     return result.recordset;
   } catch (err) {
     console.error("Erro na função de query:", err);
     throw err;
-  } finally {
-    pool.close();
   }
 };

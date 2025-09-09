@@ -30,7 +30,7 @@ export const ContainerLogo = styled.div`
 
 export const NavBar = styled.div`
 
-    width: 50%;
+    width: 60%;
     height: 20px;
     display: flex;
     flex-direction: row;
@@ -39,6 +39,7 @@ export const NavBar = styled.div`
     gap: 10%;
     margin: auto 0;
     font-size: 23px;
+    /* border: solid 1px red; */
 
     h4{
         cursor: pointer;

@@ -28,7 +28,7 @@ export const ContainerButton = styled.div`
 
 export const ButtonCadastrar = styled.button`
 
-    width: 18%;
+    width: 22%;
     height: 35px;
     margin-right: 5%;
     display: flex;

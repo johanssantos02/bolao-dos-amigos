@@ -11,6 +11,11 @@ export const ContainerBody = styled.div`
     overflow: auto;
     position: relative;
 
+    .botaoCadastrarResultados{
+        background-color: orange;
+        margin-top: 15px;
+    }
+
      &::before {
     content: '';
     position: absolute; /* Essencial para o posicionamento */

@@ -23,13 +23,15 @@ const style = {
 export interface IModalProps {
     openModal: boolean;
     closeModal: () => void;
-    onSucess: () => void
+    onSucess: () => void;
+    tipoDeCadastro: number
 }
 
 export default function ModalCadastrar({
     closeModal,
     onSucess,
-    openModal
+    openModal,
+    tipoDeCadastro
 }: IModalProps) {
 
     const [
@@ -38,7 +40,7 @@ export default function ModalCadastrar({
     ] = useState('')
 
 
-    const handleCadastrarNovoJogador = async() => {
+    const handleCadastrarNovoJogador = async () => {
         try {
             const response = await ApiServiceBolao.ControllerJogadores.CadastrarJogadores({
                 nome: nome
@@ -49,6 +51,20 @@ export default function ModalCadastrar({
             return;
         } catch (error) {
             toast.error('Erro ao cadastrar um novo Jogador!')
+            return console.error(error)
+        }
+    }
+    const handleCadastrarNovoTime = async () => {
+        try {
+            const response = await ApiServiceBolao.ControllerTimes.CadastrarTime(
+                nome
+            )
+            toast.success('Time cadastrado com sucesso')
+            onSucess()
+            closeModal()
+            return;
+        } catch (error) {
+            toast.error('Erro ao cadastrar um novo Time!')
             return console.error(error)
         }
     }
@@ -71,28 +87,58 @@ export default function ModalCadastrar({
             >
                 <Fade in={openModal}>
                     <Box sx={style}>
-                        <HeaderModal>
-                            <h2>Cadastrar um novo jogador</h2>
-                        </HeaderModal>
-                        <InputComLabel>
-                            <Label>
-                                Nome Jogador :
-                            </Label>
-                            <Input
-                                onChange={(e) => setNome(e.target.value)}
-                            >
+                        {tipoDeCadastro === 1 ? (
+                            <>
+                                <HeaderModal>
+                                    <h2>Cadastrar um novo jogador</h2>
+                                </HeaderModal>
+                                <InputComLabel>
+                                    <Label>
+                                        Nome Jogador :
+                                    </Label>
+                                    <Input
+                                        onChange={(e) => setNome(e.target.value)}
+                                    >
 
-                            </Input>
-                        </InputComLabel>
-                        <ContainerButton>
-                            <ButtonConfirmarCadastro
-                            onClick={() => {
-                                handleCadastrarNovoJogador()
-                            }}
-                            >
-                                Cadastrar
-                            </ButtonConfirmarCadastro>
-                        </ContainerButton>
+                                    </Input>
+                                </InputComLabel>
+                                <ContainerButton>
+                                    <ButtonConfirmarCadastro
+                                        onClick={() => {
+                                            handleCadastrarNovoJogador()
+                                        }}
+                                    >
+                                        Cadastrar
+                                    </ButtonConfirmarCadastro>
+                                </ContainerButton>
+                            </>
+                        ) : tipoDeCadastro === 2 ? (
+                            <>
+                                <HeaderModal>
+                                    <h2>Cadastrar um novo time</h2>
+                                </HeaderModal>
+                                <InputComLabel>
+                                    <Label>
+                                        Nome Time :
+                                    </Label>
+                                    <Input
+                                        onChange={(e) => setNome(e.target.value)}
+                                    >
+
+                                    </Input>
+                                </InputComLabel>
+                                <ContainerButton>
+                                    <ButtonConfirmarCadastro
+                                        onClick={() => {
+                                            handleCadastrarNovoTime()
+                                        }}
+                                    >
+                                        Cadastrar
+                                    </ButtonConfirmarCadastro>
+                                </ContainerButton>
+                            </>
+                        ) : null}
+
                     </Box>
                 </Fade>
             </Modal>

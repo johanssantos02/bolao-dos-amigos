@@ -3,15 +3,17 @@ import { Api } from "../../../api"
 
 
 export interface IObterJogadoresData{
-    id: number,
+    idJogador: number,
     nome: string
 }
-export const ObterJogadores = async() => {
-   try {
-    const response = await Api.get<IObterJogadoresData[]>("/jogadores/obter-jogadores")
+export const ObterJogadores = async(
 
-    return response
+):Promise<IObterJogadoresData[]> => {
+   try {
+    const response = await Api.get("/jogadores/obter-jogadores")
+
+    return response.data
    } catch (error) {
-    console.log(error)
+    throw error
    } 
 }

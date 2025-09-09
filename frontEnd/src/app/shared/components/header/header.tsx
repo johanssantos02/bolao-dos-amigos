@@ -18,13 +18,16 @@ export const Header = () => {
 
             <NavBar>
                 <h4 onClick={() => Navigate("/")}>
-                    Bolão
+                    Inicio
                 </h4>
                 <h4 onClick={() => Navigate("/Historico-apostas")}>
                     Histórico
                 </h4>
-                <h4 onClick={() => Navigate("/Jogadores")}>
-                    Cadastrar Jogador
+                <h4 onClick={() => Navigate("/Participantes")}>
+                    Cadastrar Participantes
+                </h4>
+                <h4 onClick={() => Navigate("/Times")}>
+                    Cadastrar Times
                 </h4>
             </NavBar>
         </ContainerHeader>

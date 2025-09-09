@@ -14,6 +14,6 @@ export const CadastrarJogadores = async(
 
     return response
    } catch (error) {
-    console.log(error)
+    throw error
    } 
 }

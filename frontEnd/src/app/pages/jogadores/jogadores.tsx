@@ -4,7 +4,6 @@ import { ButtonCadastrar, ContainerButton, TituloPage } from "./style"
 import { ContainerBody } from "../../shared/components/bodyCentral/style"
 import { ApiServiceBolao } from "../../shared/services/ApiServiceBolao"
 import { useEffect, useState } from "react"
-import type { IObterApostasData } from "../../shared/services/ApiServiceBolao/ControllerApostas/ObterApostas/obterApostas"
 import type { IObterJogadoresData } from "../../shared/services/ApiServiceBolao/ControllerJogadores/obterJogadores/obterJogadores"
 import { TabelaDados, type IHeaderConfig } from "../../shared/components/Tabela/tabela"
 import { FaPlus } from "react-icons/fa"
@@ -13,7 +12,7 @@ import ModalCadastrar from "../../shared/components/modal/modal"
 export const Jogadores = () => {
 
     const dadosHeader: IHeaderConfig[] = [
-        { label: "Jogadores", key: "nome" },
+        { label: "Participante", key: "nome" },
         { label: "Ações", key: "actions" }
     ];
 
@@ -31,7 +30,7 @@ export const Jogadores = () => {
         try {
             const response = await ApiServiceBolao.ControllerJogadores.ObterJogadores()
             if (response) {
-                setDados(response.data)
+                setDados(response)
             }
             return response
         } catch (error) {
@@ -50,12 +49,12 @@ export const Jogadores = () => {
         <Fragment>
             <Header />
             <ContainerBody>
-                <TituloPage>Jogadores</TituloPage>
+                <TituloPage>Participantes</TituloPage>
                 <ContainerButton>
                     <ButtonCadastrar
                     onClick={() => setModalCadastrarNovoJogadorEstaAberta(true)}
                     >
-                        Novo Jogador
+                        Novo Participante
                         <FaPlus size={20} color="white"/>
                     </ButtonCadastrar>
                 </ContainerButton>
@@ -70,6 +69,7 @@ export const Jogadores = () => {
                     openModal={modalCadastrarNovoJogadorEstaAberta}
                     closeModal={() => setModalCadastrarNovoJogadorEstaAberta(false)}
                     onSucess={() => handleObterJogadores()}
+                    tipoDeCadastro={1}
                 />
             )}
 

@@ -7,10 +7,26 @@ export const PalpitesController = {
 
     listar: async (req: Request, res: Response) => {
         try {
-            const { idBolao } = req.body;
-            const { idJogador } = req.body;
+            const { idJogadorBolao } = req.query;
 
-            const response = await query(`Select * from palpites where idBolao = ${idBolao} and idJogador = ${idJogador}`)
+            const response = await query(`SELECT 
+                    p.id AS idPalpite,
+                    p.dataPalpite,
+                    p.idParticipanteBolao,
+                    pa.idPartida,
+                    pa.dataPartida,
+                    t1.NomeTime AS Time1,
+                    t2.NomeTime AS Time2,
+                    tp.NomeTime AS TimePalpite
+                    FROM palpites p
+                    INNER JOIN partidas pa 
+                        ON p.idPartida = pa.idPartida
+                    INNER JOIN Times t1 
+                        ON pa.t1 = t1.IdTime
+                    INNER JOIN Times t2 
+                        ON pa.t2 = t2.IdTime
+                    INNER JOIN Times tp 
+                    ON p.timePalpite = tp.IdTime where idParticipanteBolao = ${idJogadorBolao}`)
             return res.json(response)
 
         } catch (error) {
@@ -21,56 +37,35 @@ export const PalpitesController = {
 
     criar: async (req: Request, res: Response) => {
 
-        const { dataPalpite } = req.body;
         const { idpartida } = req.body;
-        const { idJogador } = req.body;
-        const { timeApostadoId } = req.body;
-        const { idBolao } = req.body;
-        const { valorApostado } = req.body;
+        const { idParticipanteBolao } = req.body;
+        const { timePalpite } = req.body;
 
-        if (!dataPalpite) {
-            return res.status(400).json({ error: "Campos obrigatórios faltando" });
-        }
+       
         if (!idpartida) {
             return res.status(400).json({ error: "Necessário informar a partida" });
         }
-        if (!idJogador) {
+        if (!idParticipanteBolao) {
             return res.status(400).json({ error: "Necessário informar a jogador" });
         }
-        if (!timeApostadoId) {
+        if (timePalpite === null || timePalpite === undefined) {
             return res.status(400).json({ error: "Necessário escolher o time" });
-        }
-        if (!idBolao) {
-            return res.status(400).json({ error: "Campos obrigatórios faltando" });
-        }
-        if (!valorApostado) {
-            return res.status(400).json({ error: "Necessário informar o valor do palpite" });
         }
 
         try {
             const sqlInsert = `
-            insert into apostas 
-            (dataPalpite,
-            idpartida,
-            idJogador,
-            timeApostadoId,
-            idBolao,
-            valorApostado
-            ) values (
-            ${dataPalpite},
-            ${idpartida},
-            ${idJogador},
-            ${timeApostadoId},
-            ${idBolao},
-            ${valorApostado}
-            )
-            `
+            insert into palpites(idpartida,idParticipanteBolao,timePalpite) values(
+                    ${idpartida},
+                    ${idParticipanteBolao},
+                    ${timePalpite}
+                )
+                    `
 
             await query(sqlInsert)
 
             return res.status(200).json({ message: "Palpite cadastrado com sucesso!" });
         } catch (error) {
-            return res.status(500).json({ error: "Erro ao cadastrar jogador, verifique os dados" })
+            return res.status(500).json({ error: "Erro ao cadastrar palpite, verifique os dados" })
         }
     }
 }
